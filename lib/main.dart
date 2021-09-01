@@ -1,45 +1,67 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(new myApp());
+void main()=> runApp(new MyApp());
 
-class myApp extends StatelessWidget {
+
+class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-    // throw UnimplementedError();
-    return MaterialApp(home: AppHome(), debugShowCheckedModeBanner: false);
+   return new MaterialApp(
+     debugShowCheckedModeBanner: false,
+     title: 'My App',
+     home: new MyHomePage(
+       title: 'My App2'
+     ),
+   );
   }
+
 }
 
-class AppHome extends StatelessWidget {
+class MyHomePage extends StatefulWidget{
+
+  final String title;
+
+  MyHomePage({required this.title});
+
+  @override
+  State<StatefulWidget> createState() {
+   return new MyHomePageState();
+  }
+
+  
+}
+class MyHomePageState extends State<MyHomePage>{
+  int counter = 0;
+
   @override
   Widget build(BuildContext context) {
-    // throw UnimplementedError();
     return new Scaffold(
-      appBar: AppBar(
-        leading: new IconButton(
-          onPressed: () {
-            print("pressed navigate");
-          },
-          icon: Icon(Icons.menu),
-          tooltip: "Navigation menu",
-        ),
-        title: new Text("My App"),
-        actions: <Widget>[
-          new IconButton(
-            onPressed: () {
-              print("pressed search");
-            },
-            icon: Icon(Icons.search),
-            tooltip: "Navigation menu",
-          )
-        ],
+      appBar: new AppBar(
+        title: new Text(widget.title),
       ),
-      body: new Center(child: new Text("Hello,Rocket")),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            new Text("you have pushed the buttons this many times :"),
+            new Text("$counter",
+              style:  Theme.of(context).textTheme.display2,)
+          ],
+        ),
+      ),
       floatingActionButton: new FloatingActionButton(
-          tooltip: "Add", child: Icon(Icons.add), onPressed: null),
+          child: Icon(Icons.add),
+          onPressed: (){
+            setState(() {
+              ++counter;
+            });
+            print(counter);
+          }),
     );
   }
 }
+
+
 
 // import 'package:flutter/material.dart';
 //
