@@ -1,65 +1,159 @@
 import 'package:flutter/material.dart';
 
-void main()=> runApp(new MyApp());
+
+void main() =>runApp(new MyApp());
 
 
 class MyApp extends StatelessWidget{
   @override
   Widget build(BuildContext context) {
-   return new MaterialApp(
-     debugShowCheckedModeBanner: false,
-     title: 'My App',
-     home: new MyHomePage(
-       title: 'My App2'
-     ),
-   );
-  }
+    return MaterialApp(
+      title: "Shopping App",
+      home: ShoppingList(
+        products: <Product>[
+          Product(name: 'Eggs'),
+          Product(name: 'Apples'),
+          Product(name: 'Chocolate chips'),
+          Product(name: 'banana'),
+          Product(name: 'milk'),
 
-}
-
-class MyHomePage extends StatefulWidget{
-
-  final String title;
-
-  MyHomePage({required this.title});
-
-  @override
-  State<StatefulWidget> createState() {
-   return new MyHomePageState();
-  }
-
-  
-}
-class MyHomePageState extends State<MyHomePage>{
-  int counter = 0;
-
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: new AppBar(
-        title: new Text(widget.title),
+        ]
       ),
-      body: new Center(
-        child: new Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            new Text("you have pushed the buttons this many times :"),
-            new Text("$counter",
-              style:  Theme.of(context).textTheme.display2,)
-          ],
-        ),
-      ),
-      floatingActionButton: new FloatingActionButton(
-          child: Icon(Icons.add),
-          onPressed: (){
-            setState(() {
-              ++counter;
-            });
-            print(counter);
-          }),
     );
   }
 }
+
+class Product{
+  final String name;
+  Product({required this.name});
+}
+
+class ShoppingList extends StatefulWidget{
+
+  final List<Product> products;
+
+  ShoppingList({required this.products});
+
+  @override
+  State<StatefulWidget> createState()=> ShoppingListState();
+
+
+}
+
+class ShoppingListState extends State<ShoppingList>{
+
+  // Set<Product> shoppingCart = Set();
+  //
+  //
+  // // void handleCartChanged(Product product, bool inCart){
+  //   setState(() {
+  //     if(inCart){
+  //       shoppingCart.remove(product);
+  //     }else
+  //   });
+  // }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: new AppBar(
+        title: new Text('Shopping List'),
+      ),
+      body: new ListView(
+        padding: EdgeInsets.symmetric(vertical: 8.0),
+        children: widget.products.map((Product product) {
+          return ShoppingListItem(
+            product: product,
+          );
+        }).toList(),
+      ),
+    );
+  }
+
+}
+
+class ShoppingListItem extends StatelessWidget{
+  final Product product;
+  ShoppingListItem({required this.product});
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      onTap: (){
+
+      },
+      leading: CircleAvatar(
+        backgroundColor:  Theme.of(context).primaryColor,
+        child: Text(product.name[0]),
+      ),
+      title: Text(product.name),
+    );
+  }
+
+}
+
+
+
+
+// void main()=> runApp(new MyApp());
+//
+//
+// class MyApp extends StatelessWidget{
+//   @override
+//   Widget build(BuildContext context) {
+//    return new MaterialApp(
+//      debugShowCheckedModeBanner: false,
+//      title: 'My App',
+//      home: new MyHomePage(
+//        title: 'My App2'
+//      ),
+//    );
+//   }
+//
+// }
+// class MyHomePage extends StatefulWidget{
+//   final String title;
+//
+//   MyHomePage({required this.title});
+//   @override
+//   State<StatefulWidget> createState() {
+//    return new MyHomePageState();
+//
+//   }
+//
+// }
+//
+// class MyHomePageState extends State<MyHomePage>{
+//
+//   int counter = 0;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//   return new Scaffold(
+//     appBar: new AppBar(
+//       title: new Text(widget.title),
+//     ),
+//     body:  new Center(
+//       child: new Column(
+//         mainAxisAlignment: MainAxisAlignment.center,
+//         children: [
+//           new Text("you have pushed the buttons this many times :"),
+//       new Text("$counter",
+//               style:  Theme.of(context).textTheme.display2,)
+//         ],
+//       ),
+//     ),
+//     floatingActionButton: new FloatingActionButton(
+//         child: Icon(Icons.add),
+//         onPressed: (){
+//           setState(() {
+//             ++counter;
+//           });
+//           print(counter);
+//         }),
+//   );
+//   }
+//
+// }
 
 
 
