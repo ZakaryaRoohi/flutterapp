@@ -2,118 +2,184 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(new MyApp());
 
+
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Shopping App",
-      debugShowCheckedModeBanner: false,
-      home: ShoppingList(products: <Product>[
-        Product(name: 'Eggs'),
-        Product(name: 'Apples'),
-        Product(name: 'Chocolate chips'),
-        Product(name: 'banana'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-        Product(name: 'milk'),
-      ]),
-    );
-  }
-}
-
-class Product {
-  final String name;
-
-  Product({required this.name});
-}
-
-
-class ShoppingList extends StatefulWidget {
-  final List<Product> products;
-
-  ShoppingList({required this.products});
-
-  @override
-  State<StatefulWidget> createState() => ShoppingListState();
-}
-
-class ShoppingListState extends State<ShoppingList> {
-  Set<Product> shoppingCart = Set<Product>();
-
-  void handleCartChanged(Product product, bool inCart) {
-    setState(() {
-      if (inCart) {
-        shoppingCart.remove(product);
-      } else {
-        shoppingCart.add(product);
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: new AppBar(
-        title: new Text('Shopping List'),
-      ),
-      body: new ListView(
-        padding: EdgeInsets.symmetric(vertical: 8.0),
-        children: widget.products.map((Product product) {
-          return ShoppingListItem(
-              product: product,
-              inCart: shoppingCart.contains(product),
-              onCartChanged: handleCartChanged);
-        }).toList(),
-      ),
+    return new MaterialApp(
+        title: 'اینستاگرام',
+        debugShowCheckedModeBanner: false,
+        theme: new ThemeData(
+          primaryIconTheme: IconThemeData( color: Colors.black),
+          primaryTextTheme: TextTheme(title: TextStyle(color: Colors.black)),
+        ),
+        home : MyHomePage()
     );
   }
+
 }
 
-class ShoppingListItem extends StatelessWidget {
-  final Product product;
-  final onCartChanged;
-  final bool inCart;
-
-  ShoppingListItem(
-      {required this.inCart, this.onCartChanged, required this.product});
-
-  Color getColor(BuildContext context) {
-    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
-  }
-
-  TextStyle? getTextStyle(BuildContext context) {
-    if (inCart) {
-      return TextStyle(
-          color: Colors.black54, decoration: TextDecoration.lineThrough);
-    } else
-      return null;
-  }
+class MyHomePage extends StatelessWidget {
+  final appBar = new AppBar(
+    backgroundColor: new Color(0xfff8faf8),
+    elevation: 1.0,
+    centerTitle: true,
+    leading: new Icon(Icons.camera_alt),
+    title : SizedBox(
+      height: 40.0,
+      child: new Image.asset("assets/images/insta_logo.png"),
+    ),
+    actions: <Widget>[
+      new Padding(padding: EdgeInsets.only(right : 12.0) , child: new Icon(Icons.send))
+    ],
+  );
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      onTap: () {
-        print(inCart);
-        onCartChanged(product, inCart);
-      },
-      leading: CircleAvatar(
-        backgroundColor: getColor(context),
-        child: Text(product.name[0]),
+    return new Scaffold(
+      appBar: appBar,
+      bottomNavigationBar: new Container(
+          color:  Colors.white,
+          height: 50.0,
+          alignment: Alignment.center,
+          child: new BottomAppBar(
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: <Widget>[
+                new IconButton(icon: new Icon(Icons.home , color: Colors.black), onPressed: null),
+                new IconButton(icon: new Icon(Icons.search , color: Colors.black), onPressed: null),
+                new IconButton(icon: new Icon(Icons.add_box , color: Colors.black), onPressed: null),
+                new IconButton(icon: new Icon(Icons.favorite, color: Colors.black), onPressed: null),
+                new IconButton(icon: new Icon(Icons.account_box, color: Colors.black), onPressed: null)
+              ],
+            ),
+          )
       ),
-      title: Text(product.name, style: getTextStyle(context)),
     );
   }
+
 }
+
+
+
+
+// import 'package:flutter/material.dart';
+//
+// void main() => runApp(new MyApp());
+//
+// class MyApp extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return MaterialApp(
+//       title: "Shopping App",
+//       debugShowCheckedModeBanner: false,
+//       home: ShoppingList(products: <Product>[
+//         Product(name: 'Eggs'),
+//         Product(name: 'Apples'),
+//         Product(name: 'Chocolate chips'),
+//         Product(name: 'banana'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//         Product(name: 'milk'),
+//       ]),
+//     );
+//   }
+// }
+//
+// class Product {
+//   final String name;
+//
+//   Product({required this.name});
+// }
+//
+//
+// class ShoppingList extends StatefulWidget {
+//   final List<Product> products;
+//
+//   ShoppingList({required this.products});
+//
+//   @override
+//   State<StatefulWidget> createState() => ShoppingListState();
+// }
+//
+// class ShoppingListState extends State<ShoppingList> {
+//   Set<Product> shoppingCart = Set<Product>();
+//
+//   void handleCartChanged(Product product, bool inCart) {
+//     setState(() {
+//       if (inCart) {
+//         shoppingCart.remove(product);
+//       } else {
+//         shoppingCart.add(product);
+//       }
+//     });
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: new AppBar(
+//         title: new Text('Shopping List'),
+//       ),
+//       body: new ListView(
+//         padding: EdgeInsets.symmetric(vertical: 8.0),
+//         children: widget.products.map((Product product) {
+//           return ShoppingListItem(
+//               product: product,
+//               inCart: shoppingCart.contains(product),
+//               onCartChanged: handleCartChanged);
+//         }).toList(),
+//       ),
+//     );
+//   }
+// }
+//
+// class ShoppingListItem extends StatelessWidget {
+//   final Product product;
+//   final onCartChanged;
+//   final bool inCart;
+//
+//   ShoppingListItem(
+//       {required this.inCart, this.onCartChanged, required this.product});
+//
+//   Color getColor(BuildContext context) {
+//     return inCart ? Colors.black54 : Theme.of(context).primaryColor;
+//   }
+//
+//   TextStyle? getTextStyle(BuildContext context) {
+//     if (inCart) {
+//       return TextStyle(
+//           color: Colors.black54, decoration: TextDecoration.lineThrough);
+//     } else
+//       return null;
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return ListTile(
+//       onTap: () {
+//         print(inCart);
+//         onCartChanged(product, inCart);
+//       },
+//       leading: CircleAvatar(
+//         backgroundColor: getColor(context),
+//         child: Text(product.name[0]),
+//       ),
+//       title: Text(product.name, style: getTextStyle(context)),
+//     );
+//   }
+// }
 
 // void main()=> runApp(new MyApp());
 //
