@@ -1,57 +1,64 @@
 import 'package:flutter/material.dart';
 
+void main() => runApp(new MyApp());
 
-void main() =>runApp(new MyApp());
-
-
-class MyApp extends StatelessWidget{
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "Shopping App",
-      home: ShoppingList(
-        products: <Product>[
-          Product(name: 'Eggs'),
-          Product(name: 'Apples'),
-          Product(name: 'Chocolate chips'),
-          Product(name: 'banana'),
-          Product(name: 'milk'),
-
-        ]
-      ),
+      debugShowCheckedModeBanner: false,
+      home: ShoppingList(products: <Product>[
+        Product(name: 'Eggs'),
+        Product(name: 'Apples'),
+        Product(name: 'Chocolate chips'),
+        Product(name: 'banana'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+        Product(name: 'milk'),
+      ]),
     );
   }
 }
 
-class Product{
+class Product {
   final String name;
+
   Product({required this.name});
 }
 
-class ShoppingList extends StatefulWidget{
 
+class ShoppingList extends StatefulWidget {
   final List<Product> products;
 
   ShoppingList({required this.products});
 
   @override
-  State<StatefulWidget> createState()=> ShoppingListState();
-
-
+  State<StatefulWidget> createState() => ShoppingListState();
 }
 
-class ShoppingListState extends State<ShoppingList>{
+class ShoppingListState extends State<ShoppingList> {
+  Set<Product> shoppingCart = Set<Product>();
 
-  // Set<Product> shoppingCart = Set();
-  //
-  //
-  // // void handleCartChanged(Product product, bool inCart){
-  //   setState(() {
-  //     if(inCart){
-  //       shoppingCart.remove(product);
-  //     }else
-  //   });
-  // }
+  void handleCartChanged(Product product, bool inCart) {
+    setState(() {
+      if (inCart) {
+        shoppingCart.remove(product);
+      } else {
+        shoppingCart.add(product);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,36 +70,50 @@ class ShoppingListState extends State<ShoppingList>{
         padding: EdgeInsets.symmetric(vertical: 8.0),
         children: widget.products.map((Product product) {
           return ShoppingListItem(
-            product: product,
-          );
+              product: product,
+              inCart: shoppingCart.contains(product),
+              onCartChanged: handleCartChanged);
         }).toList(),
       ),
     );
   }
-
 }
 
-class ShoppingListItem extends StatelessWidget{
+class ShoppingListItem extends StatelessWidget {
   final Product product;
-  ShoppingListItem({required this.product});
+  final onCartChanged;
+  final bool inCart;
+
+  ShoppingListItem(
+      {required this.inCart, this.onCartChanged, required this.product});
+
+  Color getColor(BuildContext context) {
+    return inCart ? Colors.black54 : Theme.of(context).primaryColor;
+  }
+
+  TextStyle? getTextStyle(BuildContext context) {
+    if (inCart) {
+      return TextStyle(
+          color: Colors.black54, decoration: TextDecoration.lineThrough);
+    } else
+      return null;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: (){
-
+      onTap: () {
+        print(inCart);
+        onCartChanged(product, inCart);
       },
       leading: CircleAvatar(
-        backgroundColor:  Theme.of(context).primaryColor,
+        backgroundColor: getColor(context),
         child: Text(product.name[0]),
       ),
-      title: Text(product.name),
+      title: Text(product.name, style: getTextStyle(context)),
     );
   }
-
 }
-
-
-
 
 // void main()=> runApp(new MyApp());
 //
@@ -154,8 +175,6 @@ class ShoppingListItem extends StatelessWidget{
 //   }
 //
 // }
-
-
 
 // import 'package:flutter/material.dart';
 //
