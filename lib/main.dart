@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:myapp/my_home_page.dart';
 void main() => runApp(new MyApp());
 
 
@@ -14,52 +14,26 @@ class MyApp extends StatelessWidget {
           primaryIconTheme: IconThemeData( color: Colors.black),
           primaryTextTheme: TextTheme(title: TextStyle(color: Colors.black)),
         ),
-        home : MyHomePage()
+        home : MyHomePages()
     );
   }
 
 }
 
-class MyHomePage extends StatelessWidget {
-  final appBar = new AppBar(
-    backgroundColor: new Color(0xfff8faf8),
-    elevation: 1.0,
-    centerTitle: true,
-    leading: new Icon(Icons.camera_alt),
-    title : SizedBox(
-      height: 40.0,
-      child: new Image.asset("assets/images/insta_logo.png"),
-    ),
-    actions: <Widget>[
-      new Padding(padding: EdgeInsets.only(right : 12.0) , child: new Icon(Icons.send))
-    ],
-  );
 
-  @override
-  Widget build(BuildContext context) {
-    return new Scaffold(
-      appBar: appBar,
-      bottomNavigationBar: new Container(
-          color:  Colors.white,
-          height: 50.0,
-          alignment: Alignment.center,
-          child: new BottomAppBar(
-            child: new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[
-                new IconButton(icon: new Icon(Icons.home , color: Colors.black), onPressed: null),
-                new IconButton(icon: new Icon(Icons.search , color: Colors.black), onPressed: null),
-                new IconButton(icon: new Icon(Icons.add_box , color: Colors.black), onPressed: null),
-                new IconButton(icon: new Icon(Icons.favorite, color: Colors.black), onPressed: null),
-                new IconButton(icon: new Icon(Icons.account_box, color: Colors.black), onPressed: null)
-              ],
-            ),
-          )
-      ),
-    );
-  }
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
