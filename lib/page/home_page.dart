@@ -15,7 +15,7 @@ class HomePage extends StatelessWidget {
               new Row(
                 children: [
                   new Container(
-                    margin: EdgeInsets.only(right: 10.0),
+                    margin: EdgeInsets.only(left: 10.0),
                     height: 40.0,
                     width: 40.0,
                     decoration: new BoxDecoration(
@@ -25,7 +25,7 @@ class HomePage extends StatelessWidget {
                                 "https://lh3.googleusercontent.com/a-/AOh14GgfZj-1H_XbyJD8z-FyeaASX-RL_s3hJbSD-2iAGA=s96-c-rg-br100"))),
                   ),
                   new Text(
-                    "Zakarya Roohi",
+                    "زکریا روحی",
                     style: TextStyle(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -49,10 +49,28 @@ class HomePage extends StatelessWidget {
           children: [
             new Row(
               children: [
-                new IconButton(onPressed: null, icon: new Icon(FontAwesomeIcons.heart ,color: Colors.black,)),
-                new IconButton(
-                    onPressed: null, icon: new Icon(FontAwesomeIcons.comment,color: Colors.black)),
-                new IconButton(onPressed: null, icon: new Icon(FontAwesomeIcons.paperPlane,color: Colors.black))
+                // new IconButton(onPressed: null, icon: new Icon(FontAwesomeIcons.heart ,color: Colors.black)),
+                // new IconButton(onPressed: null, icon: new Icon(FontAwesomeIcons.comment,color: Colors.black)),
+                // new IconButton(onPressed: null, icon: new Icon(FontAwesomeIcons.paperPlane,color: Colors.black))
+
+                new GestureDetector(
+                  onTap: (){print("pressed");},
+                    child: new Icon(FontAwesomeIcons.heart ,color: Colors.black)
+                ),
+                new GestureDetector(
+                  onTap: (){print("pressed");},
+                  child: new Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: new Icon(FontAwesomeIcons.comment,color: Colors.black)
+                  ),
+                ),
+                new GestureDetector(
+                  onTap: (){print("pressed");},
+                  child: new Padding(
+                      padding: const EdgeInsets.only(right: 12.0),
+                      child: new Icon(FontAwesomeIcons.paperPlane,color: Colors.black)
+                  ),
+                )
               ],
             ),
             new IconButton(

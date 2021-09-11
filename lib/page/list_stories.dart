@@ -5,11 +5,11 @@ class ListStories extends StatelessWidget {
   Row topText = Row(
     mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-      new Text("stories", style: TextStyle(fontWeight: FontWeight.bold)),
+      new Text("استوری ها", style: TextStyle(fontWeight: FontWeight.bold)),
       new Row(
         children: [
           new Icon(Icons.play_arrow),
-          new Text("Watch all", style: TextStyle(fontWeight: FontWeight.bold)),
+          new Text("مشاهده همه", style: TextStyle(fontWeight: FontWeight.bold)),
         ],
       )
     ],
